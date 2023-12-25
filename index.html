@@ -63,6 +63,7 @@
         if (name.length > 0) {
             document.title = "New Year";
             document.getElementById('hello').innerHTML = "May the coming year bring you joy, success, and happiness.";
+            document.getElementsByTagName('img')[0].src = "https://i.pinimg.com/originals/67/48/e2/6748e2f29ea1cafaff9d9456d221bcdc.jpg";
             // Set up scene
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -122,7 +123,7 @@
         <!-- <img height="300px" width="300px"
             src="https://pbs.twimg.com/profile_images/1130693261767561216/mZEVSafz_400x400.png" alt=";lllll"> -->
         <img height="300px" width="300px"
-            src="https://i.pinimg.com/originals/67/48/e2/6748e2f29ea1cafaff9d9456d221bcdc.jpg" alt=";lllll">
+            src="" alt="new year wish image">
         <h1><span id="namebro">  </span> </h1>
         <p id='hello'></p>
     </div>
