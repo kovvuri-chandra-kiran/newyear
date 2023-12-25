@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year
+    </title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        #container {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #3498db;
+        }
+
+        p {
+            font-size: 1.5em;
+        }
+
+        #confetti {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.0.2"></script>
+</head>
+
+<body>
+    <script type="module">
+        var name = prompt("Please enter your name");
+        document.getElementById("namebro").innerHTML = name;
+        import * as THREE from 'https://threejs.org/build/three.module.js';
+        if (name.length > 0) {
+
+            // Set up scene
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer();
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // Create particle system with fewer particles
+            const particles = new THREE.Points(
+                new THREE.BufferGeometry().setFromPoints(generateRandomPoints(100)),
+                new THREE.PointsMaterial({ color: 0xFFFFFF, size: 0.1 })
+            );
+            scene.add(particles);
+
+            camera.position.z = 5;
+
+            // Animation
+            const animate = () => {
+                requestAnimationFrame(animate);
+
+                // Rotate the particles
+                particles.rotation.x += 0.001;
+                particles.rotation.y += 0.001;
+
+                renderer.render(scene, camera);
+            };
+
+            animate();
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                const newWidth = window.innerWidth;
+                const newHeight = window.innerHeight;
+
+                camera.aspect = newWidth / newHeight;
+                camera.updateProjectionMatrix();
+
+                renderer.setSize(newWidth, newHeight);
+            });
+
+            // Function to generate random points for the particle system
+            function generateRandomPoints(count) {
+                const points = [];
+                for (let i = 0; i < count; i++) {
+                    const x = (Math.random() - 0.5) * 10;
+                    const y = (Math.random() - 0.5) * 10;
+                    const z = (Math.random() - 0.5) * 10;
+                    points.push(new THREE.Vector3(x, y, z));
+                }
+                return points;
+            }
+        }
+
+    </script>
+    <div id="container">
+        <!-- <img height="300px" width="300px"
+            src="https://pbs.twimg.com/profile_images/1130693261767561216/mZEVSafz_400x400.png" alt=";lllll"> -->
+        <img height="300px" width="300px"
+            src="https://i.pinimg.com/originals/67/48/e2/6748e2f29ea1cafaff9d9456d221bcdc.jpg" alt=";lllll">
+        <h1>Happy New Year <span id="namebro"></span> </h1>
+        <p>May the coming year bring you joy, success, and happiness.</p>
+    </div>
+
+    <canvas id="confetti"></canvas>
+
+
+</body>
+
+</html>
